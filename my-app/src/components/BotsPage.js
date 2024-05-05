@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import MyBotArmy from "./MyBotArmy";
+import MyBotArmy from "./YourBotArmy";
 import BotCollection from "./BotCollection";
 
 function BotPage() {
-  const [BotData, setBotData] = useState([]);
+  const [botsData, setBotData] = useState([]);
 
   function fetchData() {
     return fetch("http://localhost:3000/bots")
       .then((resp) => resp.json())
       .then((data) => {
-        setBotData(data);
+        setBotsData(data);
       });
   }
 
@@ -18,31 +18,31 @@ function BotPage() {
   }, []);
 
   function enlistbot(bot) {
-    setBotData(
-      botData.map((r) => (r.id === bot.id ? { ...r, enlisted: true } : r))
+    setBotsData(
+      botsData.map((r) => (r.id === bot.id ? { ...r, enlisted: true } : r))
     );
   }
 
   function releasebot(bot) {
-    setbotData(
-      botData.map((r) => (r.id === bot.id ? { ...r, enlisted: false } : r))
+    setbotsData(
+      botsData.map((r) => (r.id === bot.id ? { ...r, enlisted: false } : r))
     );
   }
 
   function removebot(bot) {
-    const updatedBotData = botData.filter((r) => r.id !== bot.id);
-    setBotData(updatedBotData);
+    const updatedBotsData = botsData.filter((r) => r.id !== bot.id);
+    setBotsData(updatedBotsData);
   }
 
   return (
     <div>
       <MyArmy
-        bots={botData.filter((r) => r.enlisted)}
+        bots={botsData.filter((r) => r.enlisted)}
         releaseBot={releaseBot}
         removeBot={removeBot}
       />
       <BotCollection
-        bots={botData}
+        bots={botsData}
         enlistBot={enlistBot}
         removeBot={removeBot}
       />
@@ -50,5 +50,5 @@ function BotPage() {
   );
 }
 
-export default BotSPage;
+export default BotsPage;
 

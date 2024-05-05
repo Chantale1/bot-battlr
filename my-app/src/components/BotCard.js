@@ -1,6 +1,6 @@
 import React from "react";
 
-const BotUnit = ({ bot, handleClickEvent, handleDeleteAction }) => {
+const BotCard = ({ bot, handleClickEvent, handleDeleteAction }) => {
   const handleClick = () => handleClickEvent(bot);
   const handleDelete = (event) => {
     event.stopPropagation();
@@ -17,38 +17,38 @@ const BotUnit = ({ bot, handleClickEvent, handleDeleteAction }) => {
   };
 
   return (
-    <div className="bot-unit">
-      <div className="bot-unit__image">
+    <div className="bot-card">
+      <div className="bot-card__image">
         <img alt="Bot avatar" src={bot.avatar_url} />
       </div>
-      <div className="bot-unit__content">
-        <div className="bot-unit__header">
+      <div className="bot-card__content">
+        <div className="bot-card__header">
           <span>{bot.name}</span>
           {botIcons[bot.bot_class] && (
-            <i className={`bot-unit__icon icon-${botIcons[bot.bot_class]}`} />
+            <i className={`bot-card__icon icon-${botIcons[bot.bot_class]}`} />
           )}
         </div>
-        <ul className="bot-unit__details">
+        <ul className="bot-card__details">
           <li>Name: {bot.name}</li>
           <li>
-            <i className="bot-unit__stat-icon icon-heartbeat" />
+            <i className="bot-card__stat-icon icon-heartbeat" />
             Health: {bot.health}
           </li>
           <li>
-            <i className="bot-unit__stat-icon icon-lightning" />
+            <i className="bot-card__stat-icon icon-lightning" />
             Damage: {bot.damage} 
           </li>
           <li>
-            <i className="bot-unit__stat-icon icon-shield" />
+            <i className="bot-card__stat-icon icon-shield" />
             Armor: {bot.armor} 
           </li>
         </ul>
       </div>
-      <button className="bot-unit__delete" onClick={handleDelete}>
+      <button className="bot-card__delete" onClick={handleDelete}>
         Remove
       </button>
     </div>
   );
 };
 
-export default BotUnit;
+export default BotCard;

@@ -1,11 +1,13 @@
 import React from "react";
 
 function BotCollection({ onAddingBot, botsData }) {
+    
+    
     return (
         <div>
             <h1>My Bot Collection</h1>
             <ul>
-                {botsData.map(bot => (
+                { botsData && botsData.map(bot => (
                     <li key={bot.id}>
                         <h2>{bot.name}</h2>
                         <img src={bot.avatar_url} alt={bot.name} />

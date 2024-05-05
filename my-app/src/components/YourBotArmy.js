@@ -1,11 +1,13 @@
 import React from "react";
 
 function MyBotArmy({ bots, releaseBot, dischargeBot }) {
+    
+
     return (
         <div>
             <h2>The Customized Bot Forces</h2>
             <ul>
-                {bots.map((bot) => (
+                { bots && bots.map((bot) => (
                     <li key={bot.id}>
                         <h2>{bot.name}</h2>
                         <img src={bot.avatar_url} alt={bot.name} />
