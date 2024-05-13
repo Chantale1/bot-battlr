@@ -1,77 +1,70 @@
 import React from "react";
 
-const robotTypeIcons = {
-  Assault: "military",
-  Defender: "shield",
-  Support: "plus circle",
-  Medic: "ambulance",
-  Witch: "magic",
-  Captain: "star",
-};
 
-function BotSpecs({ bot }) {
+const BotSpecs = ({ botData, clearSelection, enlistBot }) => {
+  const botTypeIcon = (botClass) => {
+    switch (botClass) {
+      case "Assault":
+        return <i className="bi bi-shield-check" />;
+      case "Defender":
+        return <i className="bi bi-shield" />;
+      case "Support":
+        return <i className="bi bi-ambulance" />;
+      default:
+        return null;
+    }
+  };
+
+  const renderStats = () => {
+    return (
+      <div className="bot-stats">
+        <div className="stat">
+          <i className="bi bi-heart-fill text-danger"></i>
+          <span>{botData.health}</span>
+        </div>
+        <div className="stat">
+          <i className="bi bi-lightning-charge-fill text-warning"></i>
+          <span>{botData.damage}</span>
+        </div>
+        <div className="stat">
+          <i className="bi bi-shield-fill text-primary"></i>
+          <span>{botData.armor}</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="bot-info">
-      <div className="ui segment">
-        <div className="ui two column stackable grid">
-          <div className="ui column">
-            <img
-              alt="Robot avatar"
-              className="ui medium circular image bordered"
-              src={bot.avatar_url}
-            />
-          </div>
-          <div className="ui column">
-            <h2>Name: {bot.name}</h2>
-            <p>
-              <strong>Catchphrase: </strong>
-              {bot.catchphrase}
-            </p>
-            <strong>
-              Class: {bot.bot_class}
-              <i className={`icon ${robotTypeIcons[bot.bot_class]}`} />
-            </strong>
-            <br />
-            <div className="ui segment">
-              <div className="ui three column grid">
-                <div className="column">
-                  <i className="icon large circular red heartbeat" />
-                  <strong>Health: {bot.health}</strong>
-                </div>
-                <div className="column">
-                  <i className="icon large circular yellow lightning" />
-                  <strong>Damage: {bot.damage}</strong>
-                </div>
-                <div className="column">
-                  <i className="icon large circular blue shield" />
-                  <strong>Armor: {bot.armor}</strong>
-                </div>
-              </div>
-            </div>
-            <div className="ui buttons">
-              <button
-                className="ui button"
-                onClick={() =>
-                  console.log("Implement function to go back")
-                }
-              >
-                Go Back
-              </button>
-              <div className="or"></div>
-              <button
-                className="ui primary button"
-                onClick={() =>
-                  console.log("Implement function to enlist bot")
-                }
-              >
-                Enlist
-              </button>
-            </div>
-          </div>
+    <div className="bot-specs-container">
+      <div className="bot-image">
+        <img
+          alt="Bot"
+          className="bot-avatar"
+          src={botData.avatar_url}
+        />
+      </div>
+      <div className="bot-details">
+        <h2 className="bot-name">{botData.name}</h2>
+        <p className="bot-catchphrase">
+          <strong>Catchphrase: </strong>
+          {botData.catchphrase}
+        </p>
+        <div className="bot-class">
+          <strong>Class: </strong>
+          {botData.bot_class} {botTypeIcon(botData.bot_class)}
+        </div>
+        {renderStats()}
+        <div className="bot-actions">
+          <button className="btn btn-primary btn-action" onClick={clearSelection}>
+            Go Back
+          </button>
+          <button className="btn btn-primary btn-action" onClick={() => enlistBot(botData)}>
+            {botData.owned ? "Remove From Army" : "Enlist"}
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default BotSpecs;
