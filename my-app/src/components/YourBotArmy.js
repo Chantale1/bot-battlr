@@ -1,29 +1,22 @@
-import React from "react";
+mport React from "react";
+import BotCard from "./BotCard";
 
-function MyBotArmy({ bots, releaseBot, dischargeBot }) {
-    
+function MyBotArmy({ bots, addBot }) {
+  function showBots() {
+    return bots.map((bot) => {
+      return <BotCard key={bot.id} bot={bot} addBot={addBot} />;
+    });
+  }
 
-    return (
-        <div>
-            <h2>The Customized Bot Forces</h2>
-            <ul>
-                { bots && bots.map((bot) => (
-                    <li key={bot.id}>
-                        <h2>{bot.name}</h2>
-                        <img src={bot.avatar_url} alt={bot.name} />
-                        <p>Health: {bot.health}</p>
-                        <p>Damage: {bot.damage}</p>
-                        <p>Armor: {bot.armor}</p>
-                        <p>Class: {bot.bot_class}</p>
-                        <p>Created At: {bot.created_at}</p>
-                        <p>Updated At: {bot.updated_at}</p>
-                        <button onClick={() => releaseBot(bot)}>Release from Service</button>
-                        <button onClick={() => dischargeBot(bot)}>Discharge from Duty</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <div className="ui segment inverted olive bot-army">
+      <div className="ui five column grid">
+        <div className="row bot-army-row">{showBots()}</div>
+        <div className="row">Your Bot Army</div>
+      </div>
+    </div>
+  );
 }
 
 export default MyBotArmy;
+
